@@ -17,6 +17,8 @@ const assetsPath = join(__dirname, "public");
 const app = express();
 const PORT = 3000;
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use("/", indexRouter);
 
 app.use(express.static(assetsPath));
@@ -28,7 +30,6 @@ app.use(
   session({ secret: "regulus", resave: false, saveUninitialized: false })
 );
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
 
 passport.use(
   new LocalStrategy(async (email: string, password: string, done) => {

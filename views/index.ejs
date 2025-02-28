@@ -6,6 +6,13 @@
     <title>Home</title>
   </head>
   <body>
-    <p>a passing feeling</p>
+    <% if (locals.user) { %>
+    <h1>Welcome back!</h1>
+    <a href="/new-message">New Message</a>
+    <% } else { %>
+    <h1>Log in or sign up to create a message!</h1>
+    <a href="/login">Login</a>
+    <a href="/signup" style="margin-left: 10px">Sign Up</a>
+    <% } %>
   </body>
 </html>

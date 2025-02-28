@@ -18,10 +18,18 @@ export function User() {
     return await rowSelect("users", { column: "id", equals: id });
   };
 
-  const create = async (email: string, password: string) => {
+  const create = async (
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+  ) => {
     return await tableInsert("users", [
+      { column: "first_name", value: firstname },
+      { column: "last_name", value: lastname },
       { column: "email", value: email },
       { column: "password", value: password },
+      { column: "admin", value: false },
     ]);
   };
 
