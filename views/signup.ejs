@@ -9,6 +9,7 @@
     <%- include("partials/errors.ejs") %> <% if (locals.currentUser) { %>
     <h1>You are already logged in.</h1>
     <a href="/">Home</a>
+    <a href="/logout" style="margin-left: 10px">Log Out</a>
     <% } else { %>
     <h1>Sign Up</h1>
     <form action="/signup" method="post">
