@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become an admin!</title>
+  </head>
+  <body>
+    <% if (locals.currentUser) { %> <% if (locals.currentUser.member) { %>
+    <h1>Become an admin!</h1>
+    <%- include("partials/errors.ejs") %>
+    <form action="/become-admin" method="post">
+      <div class="form-row">
+        <label for="passcode">Passcode</label>
+        <input type="text" name="passcode" id="passcode" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <% } else { %>
+    <h1>Become an admin!</h1>
+    <p>You must <a href="/join">become a member</a> first.</p>
+    <% } %> <% } else { %>
+    <h1>Become an admin!</h1>
+    <p>
+      You must <a href="/signup">sign up</a>, <a href="/login">log in</a>, and
+      <a href="/join">become a member</a> first.
+    </p>
+    <% } %>
+  </body>
+</html>
