@@ -6,17 +6,26 @@
     <title>Home</title>
   </head>
   <body>
-    <% if (locals.currentUser) { %>
-    <h1>Welcome back!</h1>
-    <% if (locals.currentUser.admin) { %>
+    <% if (locals.currentUser) { %> <% if (locals.currentUser.admin) { %>
+    <h1>Welcome back admin!</h1>
     <a href="/new-message">New Message</a>
+    <div class="messages"></div>
+    <% } else if (locals.currentUser.member) { %>
+    <h1>Welcome back member!</h1>
+    <a href="/new-message">New Message</a>
+    <a href="/join" style="margin-left: 10px">Become an admin</a>
+    <!-- can see msg dates and authors -->
+    <div class="messages"></div>
     <% } else { %>
-    <a href="/join">Join the club</a>
+    <h1>Welcome back!</h1>
+    <a href="/new-message">New Message</a>
+    <a href="/join" style="margin-left: 10px">Join the club</a>
+    <div class="messages"></div>
     <% } %> <% } else { %>
-    <h1>Sign up and/or login for available actions</h1>
+    <h1>Sign up and/or login to create a message</h1>
     <a href="/login">Login</a>
     <a href="/signup" style="margin-left: 10px">Sign Up</a>
-    <% } %>
     <div class="messages"></div>
+    <% } %>
   </body>
 </html>
