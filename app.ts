@@ -10,6 +10,7 @@ import { compare } from "bcrypt";
 import {
   indexGet,
   joinClubGet,
+  joinClubPost,
   loginGet,
   signupGet,
   signupPost,
@@ -87,6 +88,7 @@ app.post(
 );
 
 app.get("/join", joinClubGet);
+app.post("/join", joinClubPost as any);
 
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
