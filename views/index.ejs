@@ -7,27 +7,24 @@
   </head>
   <body>
     <% if (locals.currentUser) { %> <% if (locals.currentUser.admin) { %>
-    <h1>Welcome back admin!</h1>
+    <h1>Welcome back admin <%= currentUser.first_name %>!</h1>
     <a href="/new-message">New Message</a>
-    <!-- can see msg dates and authors AND DELETE -->
-
+    <a href="/logout">Log Out</a>
     <% } else if (locals.currentUser.member) { %>
-    <h1>Welcome back member!</h1>
+    <h1>Welcome back member <%= currentUser.first_name %>!</h1>
     <a href="/new-message">New Message</a>
     <a href="/become-admin" style="margin-left: 10px">Become an admin</a>
-    <!-- can see msg dates and authors -->
-
+    <a href="/logout">Log Out</a>
     <% } else { %>
-    <h1>Welcome back!</h1>
+    <h1>Welcome back <%= currentUser.first_name %>!</h1>
     <a href="/new-message">New Message</a>
     <a href="/join" style="margin-left: 10px">Join the club</a>
-
+    <a href="/logout">Log Out</a>
     <% } %> <% } else { %>
     <h1>Sign up and/or login to create a message</h1>
     <a href="/login">Login</a>
     <a href="/signup" style="margin-left: 10px">Sign Up</a>
     <% } %>
-    <!-- include partials with dates, delete btn, etc-->
     <div class="messages" style="margin-top: 30px">
       <% if (locals.messages) { %>
       <h2>Messages</h2>
