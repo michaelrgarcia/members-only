@@ -1,0 +1,9 @@
+<% if (locals.currentUser && locals.currentUser.member && locals.message) { %>
+<p class="author">
+  From:
+  <span style="font-style: italic"
+    ><%= message.first_name %> <%= message.last_name %></span
+  >
+</p>
+<p class="date-created">Created: <%= message.created %></p>
+<% } %>

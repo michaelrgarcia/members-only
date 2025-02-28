@@ -10,6 +10,7 @@ import { compare } from "bcrypt";
 import {
   becomeAdminGet,
   becomeAdminPost,
+  deleteMsgGet,
   indexGet,
   joinClubGet,
   joinClubPost,
@@ -102,6 +103,8 @@ app.post("/become-admin", becomeAdminPost as any);
 
 app.get("/new-message", newMessageGet);
 app.post("/new-message", newMessagePost as any);
+
+app.get("/delete/:msgId", deleteMsgGet);
 
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);

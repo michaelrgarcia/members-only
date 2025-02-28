@@ -48,12 +48,20 @@ export const signupPost = [
 ];
 
 export function joinClubGet(req: Request, res: Response) {
+  if (!req.user) {
+    res.status(401).send("You must be logged in to join the club.");
+  }
+
   res.render("join");
 }
 
 export const joinClubPost = [
   validatePasscode,
   async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      res.status(401).send("You must be logged in to join the club.");
+    }
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -91,12 +99,20 @@ export function logoutGet(req: Request, res: Response, next: NextFunction) {
 }
 
 export function becomeAdminGet(req: Request, res: Response) {
+  if (!(req.user as any).member) {
+    res.status(401).send("You must be a member to become an admin.");
+  }
+
   res.render("become-admin");
 }
 
 export const becomeAdminPost = [
   validateAdminPasscode,
   async (req: Request, res: Response, next: NextFunction) => {
+    if (!(req.user as any).member) {
+      res.status(401).send("You must be a member to become an admin.");
+    }
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -120,12 +136,20 @@ export const becomeAdminPost = [
 ];
 
 export function newMessageGet(req: Request, res: Response) {
+  if (!req.user) {
+    res.status(401).send("Please log in to create a message.");
+  }
+
   res.render("new-message");
 }
 
 export const newMessagePost = [
   validateMessage,
   async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      res.status(401).send("Please log in to create a message.");
+    }
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -147,3 +171,15 @@ export const newMessagePost = [
     }
   },
 ];
+
+export async function deleteMsgGet(req: Request, res: Response) {
+  if (!(req.user as any).admin) {
+    res.status(401).send("Oops! Only admins can delete messages.");
+  }
+
+  const { msgId } = req.params;
+
+  await Message().deleteMsg(Number(msgId));
+
+  res.redirect("/");
+}

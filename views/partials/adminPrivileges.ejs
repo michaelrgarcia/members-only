@@ -1,0 +1,3 @@
+<% if (locals.currentUser && locals.currentUser.admin && locals.message) { %>
+<a href="/delete/<%= message.id %>" style="color: red">Delete</a>
+<% } %>

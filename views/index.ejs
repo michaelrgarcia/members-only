@@ -32,13 +32,13 @@
       <% if (locals.messages) { %>
       <h2>Messages</h2>
       <% messages.forEach(function(message) { %>
-      <div class="message" style="border: 1px solid">
+      <div class="message" style="border: 1px solid; padding: 10px">
         <p class="title" style="font-size: 1.3em; font-weight: bold">
           <%= message.title %>
         </p>
         <p><%= message.content %></p>
-        <%- include("partials/memberPrivileges.ejs") %> <%-
-        include("partials/adminPrivileges.ejs") %>
+        <%- include("partials/memberPrivileges.ejs", { message: message }) %>
+        <%- include("partials/adminPrivileges.ejs", { message: message }) %>
       </div>
       <% }); %> <% } else { %>
       <p style="color: red">

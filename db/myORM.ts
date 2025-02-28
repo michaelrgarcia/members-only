@@ -62,3 +62,17 @@ export async function updateColumns(
     [...values, rowId]
   );
 }
+
+// one-off
+
+export async function allMsgs() {
+  const { rows } = await pool.query(
+    "SELECT messages.id, messages.title, messages.content, users.first_name, users.last_name, messages.created FROM messages JOIN users ON (users.id=messages.author)"
+  );
+
+  return rows;
+}
+
+export async function deleteRowById(table: string, rowId: number) {
+  return await pool.query(`DELETE FROM ${table} WHERE id = $1`, [rowId]);
+}

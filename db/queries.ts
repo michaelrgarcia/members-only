@@ -1,4 +1,10 @@
-import { rowSelect, tableInsert, updateColumns } from "./myORM.js";
+import {
+  allMsgs,
+  deleteRowById,
+  rowSelect,
+  tableInsert,
+  updateColumns,
+} from "./myORM.js";
 
 interface User {
   id: number;
@@ -13,7 +19,8 @@ interface Message {
   id: number;
   title: string;
   content: string;
-  author: number; // user id
+  first_name: string;
+  last_name: string;
   created: string; // ISOString
 }
 
@@ -76,8 +83,12 @@ export function Message() {
   };
 
   const getAllMessages = async (): Promise<Message[]> => {
-    return await rowSelect(MESSAGES_TABLE);
+    return await allMsgs();
   };
 
-  return { create, getAllMessages };
+  const deleteMsg = async (msgId: number) => {
+    return await deleteRowById(MESSAGES_TABLE, msgId);
+  };
+
+  return { create, getAllMessages, deleteMsg };
 }
