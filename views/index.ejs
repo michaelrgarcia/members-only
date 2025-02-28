@@ -6,13 +6,17 @@
     <title>Home</title>
   </head>
   <body>
-    <% if (locals.user) { %>
+    <% if (locals.currentUser) { %>
     <h1>Welcome back!</h1>
+    <% if (locals.currentUser.admin) { %>
     <a href="/new-message">New Message</a>
     <% } else { %>
-    <h1>Log in or sign up to create a message!</h1>
+    <a href="/join">Join the club</a>
+    <% } %> <% } else { %>
+    <h1>Sign up and/or login for available actions</h1>
     <a href="/login">Login</a>
     <a href="/signup" style="margin-left: 10px">Sign Up</a>
     <% } %>
+    <div class="messages"></div>
   </body>
 </html>

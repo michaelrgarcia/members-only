@@ -1,4 +1,4 @@
-import { rowSelect, tableInsert } from "./myORM.js";
+import { rowSelect, tableInsert, updateColumns } from "./myORM.js";
 
 interface User {
   id: number;
@@ -10,12 +10,14 @@ interface User {
 }
 
 export function User() {
+  const USERS_TABLE = "users";
+
   const getByEmail = async (email: string): Promise<User> => {
-    return await rowSelect("users", { column: "email", equals: email });
+    return await rowSelect(USERS_TABLE, { column: "email", equals: email });
   };
 
   const getById = async (id: number): Promise<User> => {
-    return await rowSelect("users", { column: "id", equals: id });
+    return await rowSelect(USERS_TABLE, { column: "id", equals: id });
   };
 
   const create = async (
@@ -24,7 +26,7 @@ export function User() {
     email: string,
     password: string
   ) => {
-    return await tableInsert("users", [
+    return await tableInsert(USERS_TABLE, [
       { column: "first_name", value: firstname },
       { column: "last_name", value: lastname },
       { column: "email", value: email },
@@ -33,7 +35,15 @@ export function User() {
     ]);
   };
 
-  return { getByEmail, getById, create };
+  const makeAdmin = async (userId: number) => {
+    return await updateColumns(
+      USERS_TABLE,
+      [{ column: "admin", value: true }],
+      userId
+    );
+  };
+
+  return { getByEmail, getById, create, makeAdmin };
 }
 
 export function Message() {

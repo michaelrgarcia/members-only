@@ -1,4 +1,7 @@
 import { body } from "express-validator";
+import { config } from "dotenv";
+
+config();
 
 export const validateSignup = [
   body("firstname")
@@ -19,7 +22,21 @@ export const validateSignup = [
     .trim()
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters long."),
-  body("confirm-password").custom((value: any, { req }) => {
-    return value === req.body.password;
+  body("confirm-password").custom((value: string, { req }) => {
+    if (value === req.body.password) {
+      return true;
+    } else {
+      throw new Error("Passwords do not match.");
+    }
+  }),
+];
+
+export const validatePasscode = [
+  body("passcode").custom((value: string) => {
+    if (value === process.env.PASSCODE) {
+      return true;
+    } else {
+      throw new Error("Passcode is incorrect.");
+    }
   }),
 ];

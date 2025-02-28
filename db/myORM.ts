@@ -44,3 +44,21 @@ export async function tableInsert(table: string, items: Item[]) {
     values
   );
 }
+
+export async function updateColumns(
+  table: string,
+  items: Item[],
+  rowId: number
+) {
+  const columnsWithParams = items
+    .map((item, index) => `${item.column} = ` + "$" + `${index + 1}`)
+    .join(", ");
+  const values = items.map((item) => item.value);
+
+  return await pool.query(
+    `UPDATE ${table}  SET ${columnsWithParams} WHERE id = ` +
+      "$" +
+      `${items.length + 1}`,
+    [...values, rowId]
+  );
+}
