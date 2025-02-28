@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import { hash } from "bcrypt";
 
 import {
+  validateAdminPasscode,
   validatePasscode,
   validateSignup,
 } from "./validators/indexValidators.js";
@@ -90,3 +91,28 @@ export function logoutGet(req: Request, res: Response, next: NextFunction) {
 export function becomeAdminGet(req: Request, res: Response) {
   res.render("become-admin");
 }
+
+export const becomeAdminPost = [
+  validateAdminPasscode,
+  async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render("become-admin", {
+        errors: errors.array(),
+      });
+    }
+
+    if (req.user) {
+      try {
+        await User().makeAdmin((req.user as any).id);
+
+        res.redirect("/");
+      } catch (err) {
+        console.error(err);
+
+        return next(err);
+      }
+    }
+  },
+];

@@ -40,3 +40,13 @@ export const validatePasscode = [
     }
   }),
 ];
+
+export const validateAdminPasscode = [
+  body("passcode").custom((value: string) => {
+    if (value === process.env.ADMIN_PASSCODE) {
+      return true;
+    } else {
+      throw new Error("Passcode is incorrect.");
+    }
+  }),
+];
