@@ -8,6 +8,8 @@
     "moduleResolution": "NodeNext",
     "isolatedModules": true,
 
+    "typeRoots": ["./node_modules/@types"],
+
     "strict": true
   }
 }
