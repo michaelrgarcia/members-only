@@ -61,7 +61,7 @@ export const joinClubPost = [
 
     if (req.user) {
       try {
-        await User().makeAdmin((req.user as any).id);
+        await User().makeMember((req.user as any).id);
 
         res.redirect("/");
       } catch (err) {

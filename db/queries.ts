@@ -31,8 +31,17 @@ export function User() {
       { column: "last_name", value: lastname },
       { column: "email", value: email },
       { column: "password", value: password },
+      { column: "member", value: false },
       { column: "admin", value: false },
     ]);
+  };
+
+  const makeMember = async (userId: number) => {
+    return await updateColumns(
+      USERS_TABLE,
+      [{ column: "member", value: true }],
+      userId
+    );
   };
 
   const makeAdmin = async (userId: number) => {
@@ -43,7 +52,7 @@ export function User() {
     );
   };
 
-  return { getByEmail, getById, create, makeAdmin };
+  return { getByEmail, getById, create, makeMember, makeAdmin };
 }
 
 export function Message() {

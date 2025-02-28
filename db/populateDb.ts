@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name VARCHAR ( 50 ),
   email VARCHAR ( 255 ),
   password TEXT,
+  member BOOLEAN,
   admin BOOLEAN
 );
 
