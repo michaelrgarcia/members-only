@@ -76,3 +76,13 @@ export const joinClubPost = [
 export function loginGet(req: Request, res: Response) {
   res.render("login");
 }
+
+export function logoutGet(req: Request, res: Response, next: NextFunction) {
+  req.logout((err: any) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect("/");
+  });
+}

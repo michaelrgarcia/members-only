@@ -12,6 +12,7 @@ import {
   joinClubGet,
   joinClubPost,
   loginGet,
+  logoutGet,
   signupGet,
   signupPost,
 } from "./controllers/indexController.js";
@@ -86,6 +87,8 @@ app.post(
     failureRedirect: "/",
   })
 );
+
+app.get("/logout", logoutGet);
 
 app.get("/join", joinClubGet);
 app.post("/join", joinClubPost as any);
