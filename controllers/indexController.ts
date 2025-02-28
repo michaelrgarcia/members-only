@@ -115,3 +115,7 @@ export const becomeAdminPost = [
     }
   },
 ];
+
+export function newMessageGet(req: Request, res: Response) {
+  res.render("new-message");
+}

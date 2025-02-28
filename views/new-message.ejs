@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Message</title>
+  </head>
+  <body>
+    <h1>New Message</h1>
+    <% if (locals.currentUser) { %>
+    <form action="/new-message" method="post">
+      <div class="form-row">
+        <label for="title">Title: </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          maxlength="90"
+          placeholder="90 characters max"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="content">Message: </label>
+        <textarea
+          name="content"
+          id="content"
+          placeholder="500 characters max"
+          maxlength="500"
+          style="resize: none"
+          rows="8"
+          cols="25"
+        ></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <% } else { %>
+    <p>
+      You must <a href="/signup">sign up</a> and/or <a href="/login">log in</a>
+      first.
+    </p>
+    <% } %>
+  </body>
+</html>
