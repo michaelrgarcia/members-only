@@ -1,4 +1,4 @@
-import { rowSelect } from "./myORM.js";
+import { rowSelect, tableInsert } from "./myORM.js";
 
 interface User {
   id: number;
@@ -18,7 +18,14 @@ export function User() {
     return await rowSelect("users", { column: "id", equals: id });
   };
 
-  return { getByEmail, getById };
+  const create = async (email: string, password: string) => {
+    return await tableInsert("users", [
+      { column: "email", value: email },
+      { column: "password", value: password },
+    ]);
+  };
+
+  return { getByEmail, getById, create };
 }
 
 export function Message() {
