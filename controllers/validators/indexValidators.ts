@@ -50,3 +50,14 @@ export const validateAdminPasscode = [
     }
   }),
 ];
+
+export const validateMessage = [
+  body("title")
+    .trim()
+    .isLength({ max: 90 })
+    .withMessage("Title cannot be longer than 90 characters."),
+  body("content")
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage("Message cannot be longer than 500 characters."),
+];

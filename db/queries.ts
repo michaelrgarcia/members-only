@@ -9,6 +9,14 @@ interface User {
   admin: boolean;
 }
 
+interface Message {
+  id: number;
+  title: string;
+  content: string;
+  author: number; // user id
+  created: string; // ISOString
+}
+
 export function User() {
   const USERS_TABLE = "users";
 
@@ -56,5 +64,16 @@ export function User() {
 }
 
 export function Message() {
-  // factory function with methods
+  const MESSAGES_TABLE = "messages";
+
+  const create = async (title: string, content: string, userId: number) => {
+    return await tableInsert(MESSAGES_TABLE, [
+      { column: "title", value: title },
+      { column: "content", value: content },
+      { column: "author", value: userId },
+      { column: "created", value: new Date().toISOString() },
+    ]);
+  };
+
+  return { create };
 }

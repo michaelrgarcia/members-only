@@ -16,6 +16,7 @@ import {
   loginGet,
   logoutGet,
   newMessageGet,
+  newMessagePost,
   signupGet,
   signupPost,
 } from "./controllers/indexController.js";
@@ -100,6 +101,7 @@ app.get("/become-admin", becomeAdminGet);
 app.post("/become-admin", becomeAdminPost as any);
 
 app.get("/new-message", newMessageGet);
+app.post("/new-message", newMessagePost as any);
 
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);

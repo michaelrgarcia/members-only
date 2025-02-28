@@ -4,10 +4,11 @@ import { hash } from "bcrypt";
 
 import {
   validateAdminPasscode,
+  validateMessage,
   validatePasscode,
   validateSignup,
 } from "./validators/indexValidators.js";
-import { User } from "../db/queries.js";
+import { User, Message } from "../db/queries.js";
 
 export function indexGet(req: Request, res: Response) {
   res.render("index");
@@ -119,3 +120,28 @@ export const becomeAdminPost = [
 export function newMessageGet(req: Request, res: Response) {
   res.render("new-message");
 }
+
+export const newMessagePost = [
+  validateMessage,
+  async (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render("new-message", {
+        errors: errors.array(),
+      });
+    }
+
+    const { title, content } = req.body;
+
+    try {
+      await Message().create(title, content, Number((req.user as any).id));
+
+      res.redirect("/");
+    } catch (err) {
+      console.error(err);
+
+      return next(err);
+    }
+  },
+];

@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>New Message</h1>
-    <% if (locals.currentUser) { %>
+    <% if (locals.currentUser) { %> <%- include("partials/errors.ejs") %>
     <form action="/new-message" method="post">
       <div class="form-row">
         <label for="title">Title: </label>
