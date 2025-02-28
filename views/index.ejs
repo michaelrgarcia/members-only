@@ -10,23 +10,41 @@
     <h1>Welcome back admin!</h1>
     <a href="/new-message">New Message</a>
     <!-- can see msg dates and authors AND DELETE -->
-    <div class="messages"></div>
+
     <% } else if (locals.currentUser.member) { %>
     <h1>Welcome back member!</h1>
     <a href="/new-message">New Message</a>
     <a href="/become-admin" style="margin-left: 10px">Become an admin</a>
     <!-- can see msg dates and authors -->
-    <div class="messages"></div>
+
     <% } else { %>
     <h1>Welcome back!</h1>
     <a href="/new-message">New Message</a>
     <a href="/join" style="margin-left: 10px">Join the club</a>
-    <div class="messages"></div>
+
     <% } %> <% } else { %>
     <h1>Sign up and/or login to create a message</h1>
     <a href="/login">Login</a>
     <a href="/signup" style="margin-left: 10px">Sign Up</a>
-    <div class="messages"></div>
     <% } %>
+    <!-- include partials with dates, delete btn, etc-->
+    <div class="messages" style="margin-top: 30px">
+      <% if (locals.messages) { %>
+      <h2>Messages</h2>
+      <% messages.forEach(function(message) { %>
+      <div class="message" style="border: 1px solid">
+        <p class="title" style="font-size: 1.3em; font-weight: bold">
+          <%= message.title %>
+        </p>
+        <p><%= message.content %></p>
+        <%- include("partials/memberPrivileges.ejs") %> <%-
+        include("partials/adminPrivileges.ejs") %>
+      </div>
+      <% }); %> <% } else { %>
+      <p style="color: red">
+        Error retrieving messages. Please refresh the page.
+      </p>
+      <% } %>
+    </div>
   </body>
 </html>

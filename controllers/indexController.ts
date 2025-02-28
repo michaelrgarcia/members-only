@@ -10,8 +10,10 @@ import {
 } from "./validators/indexValidators.js";
 import { User, Message } from "../db/queries.js";
 
-export function indexGet(req: Request, res: Response) {
-  res.render("index");
+export async function indexGet(req: Request, res: Response) {
+  const messages = await Message().getAllMessages();
+
+  res.render("index", { messages: messages });
 }
 
 export function signupGet(req: Request, res: Response) {

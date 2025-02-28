@@ -75,5 +75,9 @@ export function Message() {
     ]);
   };
 
-  return { create };
+  const getAllMessages = async (): Promise<Message[]> => {
+    return await rowSelect(MESSAGES_TABLE);
+  };
+
+  return { create, getAllMessages };
 }
