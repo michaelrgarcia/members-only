@@ -8,6 +8,7 @@ import { join, dirname } from "node:path";
 import { User } from "./db/queries.js";
 import { compare } from "bcrypt";
 import {
+  becomeAdminGet,
   indexGet,
   joinClubGet,
   joinClubPost,
@@ -92,6 +93,8 @@ app.get("/logout", logoutGet);
 
 app.get("/join", joinClubGet);
 app.post("/join", joinClubPost as any);
+
+app.get("/become-admin", becomeAdminGet);
 
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);

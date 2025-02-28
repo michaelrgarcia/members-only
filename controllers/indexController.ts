@@ -86,3 +86,7 @@ export function logoutGet(req: Request, res: Response, next: NextFunction) {
     res.redirect("/");
   });
 }
+
+export function becomeAdminGet(req: Request, res: Response) {
+  res.render("become-admin");
+}

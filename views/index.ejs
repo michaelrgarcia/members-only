@@ -9,11 +9,12 @@
     <% if (locals.currentUser) { %> <% if (locals.currentUser.admin) { %>
     <h1>Welcome back admin!</h1>
     <a href="/new-message">New Message</a>
+    <!-- can see msg dates and authors AND DELETE -->
     <div class="messages"></div>
     <% } else if (locals.currentUser.member) { %>
     <h1>Welcome back member!</h1>
     <a href="/new-message">New Message</a>
-    <a href="/join" style="margin-left: 10px">Become an admin</a>
+    <a href="/become-admin" style="margin-left: 10px">Become an admin</a>
     <!-- can see msg dates and authors -->
     <div class="messages"></div>
     <% } else { %>
