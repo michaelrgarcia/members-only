@@ -10,7 +10,6 @@ import {
 import { User } from "../db/queries.js";
 
 export function indexGet(req: Request, res: Response) {
-  console.log(req.user);
   res.render("index");
 }
 
